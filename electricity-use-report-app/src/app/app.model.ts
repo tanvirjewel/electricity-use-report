@@ -22,3 +22,14 @@ export class DataField {
     ) {
     }
 }
+
+export class RequestModel {
+    constructor(
+        public buildingId?: number,
+        public objectId?: number,
+        public datafieldId?: number,
+        public startDate?: any,
+        public endDate?: any
+    ) {
+    }
+}

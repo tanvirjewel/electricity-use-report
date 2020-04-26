@@ -72,7 +72,7 @@ WHILE @buildingCounter <= 100
 BEGIN
 
 	DECLARE @StartTime DATETIME = '2018-01-01 00:00:00'
-		   ,@EndTime   DATETIME = '2018-01-01 23:59:00'
+		   ,@EndTime   DATETIME = '2019-12-31 23:59:00'
 
 	DECLARE @randValue DECIMAL(18,2) = 10;
 	DECLARE @Incr INT = 1;

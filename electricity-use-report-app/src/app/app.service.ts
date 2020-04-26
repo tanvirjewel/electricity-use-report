@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Building, DataObject, DataField } from './app.model';
+import { Building, DataObject, DataField, RequestModel } from './app.model';
 import { Observable } from 'rxjs';
 
 @Injectable()
@@ -18,6 +18,18 @@ export class AppService {
             })
         };
         return this.http.get("http://localhost:26978/api/DataAPI", headers);
+    }
+
+    GetDataWithFilter(requestModel: RequestModel) {
+        const headers = {
+            headers: new HttpHeaders({
+
+                'Access-Control-Allow-Origin': '*',
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Accept': '*/*'
+            })
+        };
+        return this.http.post("http://localhost:26978/api/DataAPI/data", requestModel);
     }
 
     GetBuilding(): Observable<Building[]> {

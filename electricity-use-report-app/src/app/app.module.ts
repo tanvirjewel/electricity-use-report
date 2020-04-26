@@ -7,6 +7,9 @@ import { AppComponent } from './app.component';
 import { ChartsModule } from 'ng2-charts';
 import { AppService } from './app.service';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,7 +19,11 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     ChartsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    FormsModule, 
+    ReactiveFormsModule,
+    BsDatepickerModule.forRoot()
   ],
   providers: [AppService],
   bootstrap: [AppComponent]
