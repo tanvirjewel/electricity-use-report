@@ -31,10 +31,39 @@ namespace ElectricityUseReportService.Controllers
             }
         }
 
-        // GET: api/DataAPI/5
-        public string Get(int id)
+        [Route("api/DataAPI/data")]
+        [HttpPost]
+        public Dictionary<string, List<String>> Get(RequestModel request)
         {
-            return "value";
+            using (eurdbEntities db = new eurdbEntities())
+            {
+                Dictionary<String, List<String>> response = new Dictionary<String, List<String>>();
+                DateTime startDate = DateTime.Parse("2018-01-01 00:00:00.000");
+                if (request.startDate != null)
+                {
+                    startDate = request.startDate;
+                }
+                DateTime endDate = DateTime.Parse("2018-01-01 23:59:00.000");
+                if (request.endDate != null)
+                {
+                    endDate = request.endDate;
+                }
+                List<tblReading> readings = new List<tblReading>();
+                if (request.buildingId != 0 && request.objectId != 0 && request.datafieldId != 0)
+                {
+                    readings = db.tblReadings.Where(x => x.BuildingId == request.buildingId && x.ObjectId == request.objectId && x.DatafieldId == request.datafieldId && x.Timestamp >= startDate && x.Timestamp <= endDate).ToList();
+                }
+                else
+                {
+                    readings = db.tblReadings.Where(x => x.BuildingId == request.buildingId && x.DatafieldId == request.datafieldId && x.Timestamp >= startDate && x.Timestamp <= endDate).ToList();
+                }
+
+                // List<tblReading> readins = db.tblReadings.Where(x => x.BuildingId == 1 && x.DatafieldId == 1 && x.Timestamp >= startDate && x.Timestamp <= endDate).ToList();
+                double dayDiff = (endDate - startDate).TotalDays;
+                response.Add("datetime", readings.Select(a => a.Timestamp.ToString("HH:mm")).ToList());
+                response.Add("value", readings.Select(a => a.Value.ToString()).ToList());
+                return response;
+            }
         }
 
         [ResponseType(typeof(void))]

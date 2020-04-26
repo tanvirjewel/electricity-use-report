@@ -211,6 +211,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DBModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\RequestModel.cs" />
     <Compile Include="Models\tblBuilding.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
