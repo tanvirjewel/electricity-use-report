@@ -6,18 +6,21 @@
           <label class="pr-2">Building: </label>
           <select class="form-control">
             <option>SELECT BUILDING</option>
+            <option *ngFor="let building of buildings;">{{building.Name}}</option>
           </select>
         </div>
         <div class="form-group p-2">
           <label class="pr-2">Object: </label>
-          <select class="form-control">
+          <select class="form-control" name="building">
             <option>SELECT OBJECT</option>
+            <option *ngFor="let object of objects;">{{object.Name}}</option>
           </select>
         </div>
         <div class="form-group p-2">
           <label class="pr-2">Datafield: </label>
           <select class="form-control">
             <option>SELECT DATAFIELD</option>
+            <option *ngFor="let dataField of dataFields;">{{dataField.Name}}</option>
           </select>
         </div>
         <div class="form-group p-2">
@@ -25,8 +28,8 @@
           <input type="text" class="form-control" />
         </div>
         <div class="form-group p-2">
-            <input type="button" value="Search" class="btn btn-primary" />
-          </div>
+          <input type="button" value="Search" class="btn btn-primary"  (click)="getData()"/>
+        </div>
       </form>
     </div>
   </div>

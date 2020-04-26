@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="eurdbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tblBuilding">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="tblDataField">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblObject">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblReading">
+    <Key>
+      <PropertyRef Name="BuildingId" />
+      <PropertyRef Name="ObjectId" />
+      <PropertyRef Name="DatafieldId" />
+      <PropertyRef Name="Value" />
+      <PropertyRef Name="Timestamp" />
+    </Key>
+    <Property Name="BuildingId" Type="Int16" Nullable="false" />
+    <Property Name="ObjectId" Type="Byte" Nullable="false" />
+    <Property Name="DatafieldId" Type="Byte" Nullable="false" />
+    <Property Name="Value" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityContainer Name="eurdbEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tblBuildings" EntityType="Self.tblBuilding" />
+    <EntitySet Name="tblDataFields" EntityType="Self.tblDataField" />
+    <EntitySet Name="tblObjects" EntityType="Self.tblObject" />
+    <EntitySet Name="tblReadings" EntityType="Self.tblReading" />
+  </EntityContainer>
+</Schema>

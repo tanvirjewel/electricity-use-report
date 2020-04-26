@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="eurdbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tblBuilding">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Location" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblDataField">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblObject">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'eurdb.dbo.tblReading' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="tblReading">
+    <Key>
+      <PropertyRef Name="BuildingId" />
+      <PropertyRef Name="ObjectId" />
+      <PropertyRef Name="DatafieldId" />
+      <PropertyRef Name="Value" />
+      <PropertyRef Name="Timestamp" />
+    </Key>
+    <Property Name="BuildingId" Type="smallint" Nullable="false" />
+    <Property Name="ObjectId" Type="tinyint" Nullable="false" />
+    <Property Name="DatafieldId" Type="tinyint" Nullable="false" />
+    <Property Name="Value" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Timestamp" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="eurdbModelStoreContainer">
+    <EntitySet Name="tblBuilding" EntityType="Self.tblBuilding" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblDataField" EntityType="Self.tblDataField" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblObject" EntityType="Self.tblObject" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblReading" EntityType="Self.tblReading" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [tblReading].[BuildingId] AS [BuildingId], 
+    [tblReading].[ObjectId] AS [ObjectId], 
+    [tblReading].[DatafieldId] AS [DatafieldId], 
+    [tblReading].[Value] AS [Value], 
+    [tblReading].[Timestamp] AS [Timestamp]
+    FROM [dbo].[tblReading] AS [tblReading]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

@@ -66,34 +66,52 @@ GO
 TRUNCATE TABLE [dbo].[tblReading];
 -- Add date range, the longer you add more time it will take
 
-DECLARE @counter INT = 1;
+DECLARE @buildingCounter INT = 1;
 
-WHILE @counter <= 100
+WHILE @buildingCounter <= 100
 BEGIN
 
 	DECLARE @StartTime DATETIME = '2018-01-01 00:00:00'
 		   ,@EndTime   DATETIME = '2018-01-01 23:59:00'
 
+	DECLARE @randValue DECIMAL(18,2) = 10;
+	DECLARE @Incr INT = 1;
 	WHILE DATEDIFF(MINUTE,@StartTime, @EndTime) >= 0
 	BEGIN
 
-	INSERT INTO [dbo].[tblReading] ([BuildingId], [ObjectId], [DatafieldId], [Value], [Timestamp]) VALUES ( 1, (SELECT FLOOR(RAND()*(10-1+1)+1)), 1, (SELECT RAND()*(22-5)+5), @StartTime)
-	INSERT INTO [dbo].[tblReading] ([BuildingId], [ObjectId], [DatafieldId], [Value], [Timestamp]) VALUES ( 1, (SELECT FLOOR(RAND()*(10-1+1)+1)), 2, (SELECT RAND()*(22-5)+5), @StartTime)
-	INSERT INTO [dbo].[tblReading] ([BuildingId], [ObjectId], [DatafieldId], [Value], [Timestamp]) VALUES ( 1, (SELECT FLOOR(RAND()*(10-1+1)+1)), 3, (SELECT RAND()*(22-5)+5), @StartTime)
-	INSERT INTO [dbo].[tblReading] ([BuildingId], [ObjectId], [DatafieldId], [Value], [Timestamp]) VALUES ( 1, (SELECT FLOOR(RAND()*(10-1+1)+1)), 4, (SELECT RAND()*(22-5)+5), @StartTime)
-	INSERT INTO [dbo].[tblReading] ([BuildingId], [ObjectId], [DatafieldId], [Value], [Timestamp]) VALUES ( 1, (SELECT FLOOR(RAND()*(10-1+1)+1)), 5, (SELECT RAND()*(22-5)+5), @StartTime)
-	INSERT INTO [dbo].[tblReading] ([BuildingId], [ObjectId], [DatafieldId], [Value], [Timestamp]) VALUES ( 1, (SELECT FLOOR(RAND()*(10-1+1)+1)), 6, (SELECT RAND()*(22-5)+5), @StartTime)
-	INSERT INTO [dbo].[tblReading] ([BuildingId], [ObjectId], [DatafieldId], [Value], [Timestamp]) VALUES ( 1, (SELECT FLOOR(RAND()*(10-1+1)+1)), 7, (SELECT RAND()*(22-5)+5), @StartTime)
-	INSERT INTO [dbo].[tblReading] ([BuildingId], [ObjectId], [DatafieldId], [Value], [Timestamp]) VALUES ( 1, (SELECT FLOOR(RAND()*(10-1+1)+1)), 8, (SELECT RAND()*(22-5)+5), @StartTime)
-	INSERT INTO [dbo].[tblReading] ([BuildingId], [ObjectId], [DatafieldId], [Value], [Timestamp]) VALUES ( 1, (SELECT FLOOR(RAND()*(10-1+1)+1)), 9, (SELECT RAND()*(22-5)+5), @StartTime)
-	INSERT INTO [dbo].[tblReading] ([BuildingId], [ObjectId], [DatafieldId], [Value], [Timestamp]) VALUES ( 1, (SELECT FLOOR(RAND()*(10-1+1)+1)), 10, (SELECT RAND()*(22-5)+5), @StartTime)
+	INSERT INTO [dbo].[tblReading] ([BuildingId], [ObjectId], [DatafieldId], [Value], [Timestamp]) VALUES ( @buildingCounter, (SELECT FLOOR(RAND()*(10-1+1)+1)), 1, (@randValue + (SELECT RAND()*(2-1)+1)), @StartTime)
+	INSERT INTO [dbo].[tblReading] ([BuildingId], [ObjectId], [DatafieldId], [Value], [Timestamp]) VALUES ( @buildingCounter, (SELECT FLOOR(RAND()*(10-1+1)+1)), 2, (@randValue + (SELECT RAND()*(2-1)+1)), @StartTime)
+	INSERT INTO [dbo].[tblReading] ([BuildingId], [ObjectId], [DatafieldId], [Value], [Timestamp]) VALUES ( @buildingCounter, (SELECT FLOOR(RAND()*(10-1+1)+1)), 3, (@randValue + (SELECT RAND()*(2-1)+1)), @StartTime)
+	INSERT INTO [dbo].[tblReading] ([BuildingId], [ObjectId], [DatafieldId], [Value], [Timestamp]) VALUES ( @buildingCounter, (SELECT FLOOR(RAND()*(10-1+1)+1)), 4, (@randValue + (SELECT RAND()*(2-1)+1)), @StartTime)
+	INSERT INTO [dbo].[tblReading] ([BuildingId], [ObjectId], [DatafieldId], [Value], [Timestamp]) VALUES ( @buildingCounter, (SELECT FLOOR(RAND()*(10-1+1)+1)), 5, (@randValue + (SELECT RAND()*(2-1)+1)), @StartTime)
+	INSERT INTO [dbo].[tblReading] ([BuildingId], [ObjectId], [DatafieldId], [Value], [Timestamp]) VALUES ( @buildingCounter, (SELECT FLOOR(RAND()*(10-1+1)+1)), 6, (@randValue + (SELECT RAND()*(2-1)+1)), @StartTime)
+	INSERT INTO [dbo].[tblReading] ([BuildingId], [ObjectId], [DatafieldId], [Value], [Timestamp]) VALUES ( @buildingCounter, (SELECT FLOOR(RAND()*(10-1+1)+1)), 7, (@randValue + (SELECT RAND()*(2-1)+1)), @StartTime)
+	INSERT INTO [dbo].[tblReading] ([BuildingId], [ObjectId], [DatafieldId], [Value], [Timestamp]) VALUES ( @buildingCounter, (SELECT FLOOR(RAND()*(10-1+1)+1)), 8, (@randValue + (SELECT RAND()*(2-1)+1)), @StartTime)
+	INSERT INTO [dbo].[tblReading] ([BuildingId], [ObjectId], [DatafieldId], [Value], [Timestamp]) VALUES ( @buildingCounter, (SELECT FLOOR(RAND()*(10-1+1)+1)), 9, (@randValue + (SELECT RAND()*(2-1)+1)), @StartTime)
+	INSERT INTO [dbo].[tblReading] ([BuildingId], [ObjectId], [DatafieldId], [Value], [Timestamp]) VALUES ( @buildingCounter, (SELECT FLOOR(RAND()*(10-1+1)+1)), 10,(@randValue + (SELECT RAND()*(2-1)+1)), @StartTime)
 
+	IF @randValue >= 15
+	BEGIN
+	SET @Incr = 2
+	END
+	IF @Incr = 1
+	BEGIN
+	SET @randValue = @randValue + 0.01;
+	END
+	IF @Incr = 2
+	BEGIN
+	SET @randValue = @randValue - 0.01;
+	IF @randValue = 10
+	BEGIN
+	SET @Incr = 1
+	END
+	END
 	-- Add 1 minute
 	SET @StartTime = DATEADD(MINUTE, 1, @StartTime);
 
 	END
 
-	SET @counter = @counter + 1;
+	SET @buildingCounter = @buildingCounter + 1;
 
 END
 

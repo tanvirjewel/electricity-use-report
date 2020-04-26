@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="eurdbModelStoreContainer" CdmEntityContainer="eurdbEntities">
+    <EntitySetMapping Name="tblBuildings">
+      <EntityTypeMapping TypeName="eurdbModel.tblBuilding">
+        <MappingFragment StoreEntitySet="tblBuilding">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblDataFields">
+      <EntityTypeMapping TypeName="eurdbModel.tblDataField">
+        <MappingFragment StoreEntitySet="tblDataField">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblObjects">
+      <EntityTypeMapping TypeName="eurdbModel.tblObject">
+        <MappingFragment StoreEntitySet="tblObject">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblReadings">
+      <EntityTypeMapping TypeName="eurdbModel.tblReading">
+        <MappingFragment StoreEntitySet="tblReading">
+          <ScalarProperty Name="BuildingId" ColumnName="BuildingId" />
+          <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+          <ScalarProperty Name="DatafieldId" ColumnName="DatafieldId" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
